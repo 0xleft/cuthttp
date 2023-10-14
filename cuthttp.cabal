@@ -6,22 +6,21 @@ cabal-version: 2.2
 
 name:           cuthttp
 version:        0.1.0.0
-description:    Please see the README on GitHub at <https://github.com/githubuser/cuthttp#readme>
-homepage:       https://github.com/githubuser/cuthttp#readme
-bug-reports:    https://github.com/githubuser/cuthttp/issues
-author:         Author name here
+description:    Please see the README on GitHub at <https://github.com/0xleft/cuthttp#readme>
+homepage:       https://github.com/0xleft/cuthttp#readme
+bug-reports:    https://github.com/0xleft/cuthttp/issues
+author:         plusleft
 maintainer:     example@example.com
-copyright:      2023 Author name here
-license:        BSD-3-Clause
+copyright:      2023 plusleft
+license:        MIT
 license-file:   LICENSE
 build-type:     Simple
 extra-source-files:
     README.md
-    CHANGELOG.md
 
 source-repository head
   type: git
-  location: https://github.com/githubuser/cuthttp
+  location: https://github.com/0xleft/cuthttp
 
 library
   exposed-modules:
