@@ -1,4 +1,4 @@
-cabal-version: 2.2
+cabal-version: 1.12
 
 -- This file has been generated from package.yaml by hpack version 0.35.2.
 --
@@ -27,8 +27,6 @@ library
       CutHttp
   other-modules:
       Paths_cuthttp
-  autogen-modules:
-      Paths_cuthttp
   hs-source-dirs:
       src
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
@@ -44,8 +42,6 @@ test-suite cuthttp-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
-      Paths_cuthttp
-  autogen-modules:
       Paths_cuthttp
   hs-source-dirs:
       test
