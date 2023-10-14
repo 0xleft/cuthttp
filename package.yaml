@@ -24,6 +24,7 @@ dependencies:
 - hspec
 - hspec-discover
 - network
+- bytestring
 
 ghc-options:
 - -Wall
