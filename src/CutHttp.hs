@@ -19,8 +19,7 @@ data Request = Request {
     requestPath :: String,
     requestVersion :: String,
     requestHeaders :: [(String, String)],
-    requestBody :: String,
-    stopAt :: String
+    requestBody :: String
 } deriving (Show, Eq)
 
 data Server = Server {
@@ -39,8 +38,8 @@ makeRequest request =
     "\r\n" ++
     requestBody request
 
-recvUntil :: Request -> Server -> IO String
-recvUntil request server = do
+recvUntil :: Request -> Server -> String -> Int -> IO String
+recvUntil request server stopAt maxLength = do
     addrInfo <- getAddrInfo Nothing (Just (host server)) (Just (show (port server)))
     let serverAddr = head addrInfo
 
@@ -50,20 +49,22 @@ recvUntil request server = do
     let requestStr = makeRequest request
     send socket (BS.pack requestStr)
 
-    response <- receiveInBatches socket (stopAt request)
+    response <- receiveInBatches socket stopAt maxLength
     close socket
     return response
 
-receiveInBatches :: Socket -> String -> IO String
-receiveInBatches socket stopAt = receiveInBatches' socket stopAt ""
+receiveInBatches :: Socket -> String -> Int -> IO String
+receiveInBatches socket stopAt maxLength = receiveInBatches' socket stopAt "" maxLength
 
-receiveInBatches' :: Socket -> String -> String -> IO String
-receiveInBatches' socket stopAt accumulatedData = do
+receiveInBatches' :: Socket -> String -> String -> Int -> IO String
+receiveInBatches' socket stopAt accumulatedData maxLength = do
     response <- recv socket 1
     let responseStr = unpack response
 
-    if BS.null response
+    if length accumulatedData >= maxLength
         then return accumulatedData
-        else if stopAt `isInfixOf` (accumulatedData ++ responseStr)
-            then return (accumulatedData ++ responseStr)
-            else receiveInBatches' socket stopAt (accumulatedData ++ responseStr)
+        else if BS.null response
+            then return accumulatedData
+            else if stopAt `isInfixOf` (accumulatedData ++ responseStr)
+                then return (accumulatedData ++ responseStr)
+                else receiveInBatches' socket stopAt (accumulatedData ++ responseStr) maxLength
