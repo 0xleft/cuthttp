@@ -1,5 +1,5 @@
 import Test.Hspec
-import CutHttp(makeRequest, recvUntil, Request(..), RequestType(..), Server(..))
+import Network.CutHttp(makeRequest, recvUntil, Request(..), RequestType(..), Server(..))
 import Network.Socket
 
 main :: IO ()

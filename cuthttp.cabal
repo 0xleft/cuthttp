@@ -24,7 +24,7 @@ source-repository head
 
 library
   exposed-modules:
-      CutHttp
+      Network.CutHttp
   other-modules:
       Paths_cuthttp
   hs-source-dirs:

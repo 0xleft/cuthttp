@@ -1,4 +1,4 @@
-module CutHttp(
+module Network.CutHttp (
     makeRequest
     , recvUntil
     , RequestType(..)
